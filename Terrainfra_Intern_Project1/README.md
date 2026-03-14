@@ -1,7 +1,7 @@
 # Terrainfra360 — Task Management Portals (v2)
 
-> **Web Development Internship Assignment**  
-> Two interconnected portals (Admin + User) sharing a single Firebase Firestore database, built with Next.js.  
+> **Web Development Internship Assignment**
+> Two interconnected portals (Admin + User) sharing a single Firebase Firestore database, built with Next.js.
 > This version features a **warm editorial light theme** with a sidebar-based admin layout, split-panel user login, and real-time progress tracking.
 
 ---
@@ -94,6 +94,8 @@ terrainfra360/
     └── package.json
 ```
 
+> ⚠️ `node_modules/` folders are excluded from this repository via `.gitignore`. You must install dependencies locally after cloning — see [Local Development Setup](#local-development-setup).
+
 ---
 
 ## Firebase Setup
@@ -131,7 +133,7 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 ```
 
-> ⚠️ `.env.local` is in `.gitignore` — it will never be committed to GitHub.
+> ⚠️ `.env.local` is listed in `.gitignore` — it will **never** be committed to GitHub.
 
 ### Step 5 — Set Firestore Security Rules
 
@@ -182,26 +184,59 @@ The admin task assignment dropdown reads from a `users` collection. Go to **Fire
 ### Prerequisites
 
 - **Node.js v18+** — [nodejs.org](https://nodejs.org)
+- **Git** — [git-scm.com](https://git-scm.com)
 - **Git Bash** (Windows) or Terminal (Mac/Linux)
 
-### Clone the Repository
+### Step 1 — Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/terrainfra360.git
-cd terrainfra360
+git clone https://github.com/laxdyapanagoudra37/Terrainfra_Intern_Project.git
+cd Terrainfra_Intern_Project
 ```
 
-### Install Dependencies
+### Step 2 — Install Dependencies for Admin Portal
 
 ```bash
 cd admin-portal
 npm install
-cd ..
+```
 
-cd user-portal
-npm install
+> This installs all required packages into `admin-portal/node_modules/`. It may take 1–2 minutes.
+
+After install, go back to the root:
+
+```bash
 cd ..
 ```
+
+### Step 3 — Install Dependencies for User Portal
+
+```bash
+cd user-portal
+npm install
+```
+
+> This installs all required packages into `user-portal/node_modules/`. It may take 1–2 minutes.
+
+After install, go back to the root:
+
+```bash
+cd ..
+```
+
+### Step 4 — Create Environment Files
+
+Copy the example env files and fill in your Firebase config values:
+
+```bash
+# Admin portal
+cp admin-portal/.env.local.example admin-portal/.env.local
+
+# User portal
+cp user-portal/.env.local.example user-portal/.env.local
+```
+
+Then open each `.env.local` file and replace the placeholder values with your actual Firebase credentials from Step 4 of Firebase Setup.
 
 ---
 
@@ -369,7 +404,7 @@ Add all `NEXT_PUBLIC_FIREBASE_*` environment variables in the Vercel dashboard f
 ## Troubleshooting
 
 **Tasks not showing / Firebase errors**
-- Check `.env.local` exists in both portals with all 6 values
+- Check `.env.local` exists in both portals with all 6 values filled in
 - Restart dev servers after creating `.env.local`
 
 **"Missing or insufficient permissions"**
@@ -384,11 +419,18 @@ Add all `NEXT_PUBLIC_FIREBASE_*` environment variables in the Vercel dashboard f
 **Tasks stuck on "Creating..."**
 - `.env.local` is missing in `admin-portal/` — create it and restart the server
 
+**`npm install` fails or throws errors**
+- Make sure you are running Node.js v18 or above: `node -v`
+- Delete any existing `node_modules` folder and `package-lock.json`, then re-run `npm install`
+
 **Port conflict**
 ```bash
 npx kill-port 3000
 npx kill-port 3001
 ```
 
----
+**`node_modules` not found after cloning**
+- This is expected — `node_modules` is excluded from the repository via `.gitignore`
+- Run `npm install` inside both `admin-portal/` and `user-portal/` as described in [Local Development Setup](#local-development-setup)
 
+---
