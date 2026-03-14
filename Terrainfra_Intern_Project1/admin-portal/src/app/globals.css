@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --cream: #faf7f2;
+  --paper: #f4efe6;
+  --white: #ffffff;
+  --border: #e2d9cc;
+  --border2: #cfc4b4;
+  --clay: #c4633a;
+  --clay-light: #f0d5c8;
+  --clay-dark: #9e4a28;
+  --sage: #5a7a5e;
+  --sage-light: #d4e4d6;
+  --amber: #d4820a;
+  --amber-light: #fde9c2;
+  --ink: #1e1a16;
+  --ink2: #3d3529;
+  --muted: #8c7d6e;
+  --muted2: #b5a898;
+  --shadow: 0 1px 3px rgba(30,26,22,0.08), 0 4px 12px rgba(30,26,22,0.05);
+  --shadow-md: 0 4px 16px rgba(30,26,22,0.1), 0 1px 4px rgba(30,26,22,0.06);
+  --shadow-lg: 0 12px 40px rgba(30,26,22,0.14), 0 2px 8px rgba(30,26,22,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Subtle paper texture via repeating gradient */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(30,26,22,0.015) 24px,
+      rgba(30,26,22,0.015) 25px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.fade-up { animation: fadeUp 0.4s ease forwards; }
+.slide-in { animation: slideIn 0.3s ease forwards; }
